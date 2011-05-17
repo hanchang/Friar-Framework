@@ -5,6 +5,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 
 import android.app.Activity;
@@ -25,7 +26,8 @@ public class Friar extends Activity {
 	final String ENCODING = "utf-8";
 	
 	WebView webView;
-	List<String> htmlFiles;
+	List<String> htmlFiles = new ArrayList<String>();
+	HashMap<String, Integer> htmlMap = new HashMap<String, Integer>();
 	int currentPage = 0;
 	int totalPages = 0;
 	
@@ -54,7 +56,7 @@ public class Friar extends Activity {
 
 			if (velocityX > this.SWIPE_MIN_VELOCITY && xDistance > this.SWIPE_MIN_DISTANCE) {
 				if (e1.getX() > e2.getX()) { // right to left
-					if (currentPage + 1 > totalPages) {
+					if (currentPage + 1 >= totalPages) {
 						showToast("This is the last page of the book.");
 					}
 					else {
@@ -86,6 +88,11 @@ public class Friar extends Activity {
 
 		htmlFiles = loadBook();
 		totalPages = htmlFiles.size();
+		
+		int count = 0;
+		for (String filename : htmlFiles) {
+			htmlMap.put(filename, count++);
+		}
 
 		webView = (WebView) findViewById(R.id.webview);
 		webView.setWebViewClient(new FriarWebViewClient());
@@ -116,7 +123,6 @@ public class Friar extends Activity {
 	}
 
 	private List<String> loadBook() {
-		List<String> htmlFiles = new ArrayList<String>();
 		try {
 			String[] files = getAssets().list("book");
 			for (String file : files) {
@@ -153,11 +159,7 @@ public class Friar extends Activity {
 				URI uri = new URI(url);
 				String[] segments = uri.getPath().split("/");
 				String filename = segments[segments.length - 1];
-				if (filename.contains("-")) {
-					currentPage = Integer.parseInt(filename.substring(0, filename.indexOf("-")));
-				} else {
-					currentPage = Integer.parseInt(filename.substring(0, filename.indexOf(".")));
-				}
+				currentPage = htmlMap.get(filename);
 			} catch (URISyntaxException e) {
 				e.printStackTrace();
 			}
