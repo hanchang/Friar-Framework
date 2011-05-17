@@ -8,7 +8,6 @@ import java.util.Collections;
 import java.util.List;
 
 import android.app.Activity;
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.GestureDetector;
@@ -16,7 +15,6 @@ import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.GestureDetector.SimpleOnGestureListener;
-import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Toast;
@@ -56,7 +54,6 @@ public class Friar extends Activity {
 
 			if (velocityX > this.SWIPE_MIN_VELOCITY && xDistance > this.SWIPE_MIN_DISTANCE) {
 				if (e1.getX() > e2.getX()) { // right to left
-					// showToast("Swipe Left");
 					if (currentPage + 1 > totalPages) {
 						showToast("This is the last page of the book.");
 					}
@@ -66,7 +63,6 @@ public class Friar extends Activity {
 					}
 				}
 				else {
-					// showToast("Swipe Right");
 					if (currentPage - 1 < 0) {
 						showToast("This is the first page of the book.");
 					}
@@ -141,7 +137,7 @@ public class Friar extends Activity {
 		String filename = htmlFiles.get(pageNum);
 		String url = BASE_URL + filename;
 		webView.loadUrl(url);
-		// showToast(url + ", " + currentPage);
+		showToast(currentPage + "");
 	}
 
 	private void showToast(final String text) {
