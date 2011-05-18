@@ -3,6 +3,11 @@
       package="com.szuhanchang.friar"
       android:versionCode="1"
       android:versionName="1.0">
+      <!-- 
+      If you want, add the appropriate line below to the manifest to limit orientation modes:
+      android:screenOrientation="portrait"
+      android:screenOrientation="landscape"
+      -->
     <uses-sdk android:minSdkVersion="7" />
 
     <application android:icon="@drawable/icon" android:label="@string/app_name">
