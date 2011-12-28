@@ -1,3 +1,3 @@
 The Friar Framework is a tool for generating Android ebook apps. It is based on and inspired by the Baker Framework for iOS (www.bakerframework.com) and the name is sort of a play on words.
 
-The latest installation and usage instructions are at http://friar.szuhanchang.com
+This project is now deprecated in favor of the new Friar Framework, located at http://github.com/hanchang/friar which contains support for the new HPub 1.0 format.
